@@ -1,16 +1,15 @@
 # **Lý Thuyết**
 
-**Theo lý thuyết, SQL Injection** là một kỹ thuật lợi dụng những lỗ hổng về câu truy vấn của các ứng dụng. Lỗ hổng tồn tại khi đầu vào của người dùng không được kiểm tra đúng cách, được thực hiện bằng cách chèn thêm một đoạn [SQL](https://topdev.vn/blog/sql-la-gi/) để làm sai lệnh đi câu truy vấn ban đầu, từ đó có thể khai thác dữ liệu từ database. **SQL injection** có thể cho phép attackers thực hiện các thao tác như một người quản trị web, trên cơ sở dữ liệu của ứng dụng.
+**Theo lý thuyết, SQL Injection** là một kỹ thuật lợi dụng những lỗ hổng về câu truy vấn của các ứng dụng. Lỗ hổng tồn tại khi đầu vào của người dùng không được kiểm tra đúng cách, được thực hiện bằng cách chèn thêm một đoạn SQL để làm sai lệnh đi câu truy vấn ban đầu, từ đó có thể khai thác dữ liệu từ database. **SQL injection** có thể cho phép attackers thực hiện các thao tác như một người quản trị web, trên cơ sở dữ liệu của ứng dụng.
 
 Về mặt thực tiễn: Nói đơn giản là do thiết kế của giao diện nhập dữ liệu bất kỳ và sử dụng các đầu vào này để xây dựng các truy vấn SQL, không giới hạn việc người dùng nhập những gì. Từ đó attacker lợi dụng những lỗi đó để chèn vào đó các đoạn truy vấn SQL rồi gửi lên server để sữa đổi dữ liệu từ database, hoặc lấy thông tin từ database.
 
 Sau đây là 1 bài lab đơn giản bao gồm về những vấn đề như:
 
-SQL injection
+-   SQL injection
+-   SQL statements: SELECT and UPDATE statements
 
-SQL statements: SELECT and UPDATE statements
-
-Measures to prevent and protect against popular attack
+Và cũng sẽ nói thêm về biện pháp phòng ngừa và bảo vệ/chống lại các tấn công phổ biến(Measures to prevent and protect against popular attack)
 
 # LAB
 
@@ -94,6 +93,75 @@ Lần này đề bài cho ta tài khoản và mật khẩu sẵn, mục tiêu l�
 
 -   **profileID: 10**
 -   **password: toor**
+
+Đầu tiên, ta nhập tài khoản và mật khẩu đã có để vào bên trong.
+
+![](image/sql-16.png)
+
+Khi đã vào được, kiểm tra các chỗ có thể triển tấn công, ta chỉ thấy được mục “Edit Profile” là có khả năng tấn công.
+
+![](image/sql-17.png)
+
+Thử nhập “Nick Name” đại thử coi query là gì, ta được
+
+![](image/sql-18.png)
+
+Thấy được khả năng tấn công, ta bắt đầu thử câu truy vấn như sau: **',nickName='test',email='hacked** để thử coi có thay đổi gì hơn không.
+
+Chỉ khác ở chỗ đặt câu truy vấn ở “Nick Name” hay “E-Mail” thì sẽ đổi hay có được thông tin ở vị trí mong muốn.
+
+![](image/sql-19.png)
+
+![](image/sql-20.png)
+
+Sau khi xác định là có thể khai thác, ta dùng câu truy vấn sau: **',nickName=(SELECT group_concat(tbl_name) FROM sqlite_master),email='** để coi có thông tin khác từ table khác userdata không.
+
+Kết quả ta tìm được thêm 1 table là: secrets
+
+\*Khúc này sẽ có thêm 1 cái nữa về cập nhật/thay đổi thông tin người dùng, sẽ để nó dưới phần Bonus(sau khi đã tìm ra flag)
+
+![](image/sql-21.png)
+
+Tiếp theo ta thử gọi table secrets ra thử coi, table đó chứa những gì với câu truy vấn sau: **',nickName=(SELECT sql FROM sqlite_master WHERE name ='secrets'),email='**
+
+![](image/sql-22.png)
+
+Khi đã biết trong bảng đó chứa những gì, ta dùng câu truy vấn: **',nickName=(SELECT group_concat(id \|\| "," \|\| author \|\| "," \|\| secret \|\| ":") from secrets),email='** để hiện ra nó ẩn giấu gì trong đó
+
+Và phát hiện ra cái cần kiếm **THM{b3a540515dbd9847c29cffa1bef1edfb}**
+
+![](image/sql-23.png)
+
+### \*Bonus
+
+Vào lúc ta tìm ra chỉ có 2 table là: userdata và secrets.
+
+Thì ở khúc trên ta đã tìm ra flag ở secrets, còn userdata, ta cùng ngó qua thử để coi trong table đó chứa những gì với câu truy vấn sau: **',nickName=(SELECT sql FROM sqlite_master WHERE name ='usertable'),email='**
+
+![](image/sql-24.png)
+
+Thấy được việc table userdata này có chứa những thông tin cần thiết để đăng nhập như: id, password, name. Ta dùng câu truy vấn sau để hiện những thông tin đó ra: **',nickName=(SELECT group_concat(profileID \|\|  "," \|\| name \|\| "," \|\| password \|\| ":") from usertable),email='**
+
+Có thêm name để biết user đó là ai có gì đặc biệt vì trong đây **user id** theo số thứ tự từ **10** nhưng có một user nhảy phát lên **99.** Ta thấy được user đặc biệt này là admin. Nên ta quyết định thử thay đổi mật khẩu của admin này thử.
+
+![](image/sql-25.png)
+
+Vì đây là môi trường thử nghiệm/học tập, nên các table này thường được hash ra bằng **SHA2 với size/round là 256/64**, ta dùng 1 trang web tool để chuyển 1 đoạn pass ta mong muốn thay đổi thành mã hash của nó. Rồi dùng đoạn mã hash vừa có cập nhật lại pass của admin.
+
+![](image/sql-26.png)
+
+Sau khi đã có đoạn mã hash, ta tiến hành dùng câu truy vấn như sau để cập nhật pass cho admin:
+
+**', password='c1c224b03cd9bc7b6a86d77f5dace40191766c485cd55dc48caf9ac873335d6f' WHERE name='Admin'-- -**
+
+Sau khi đã cập nhật xong ta lại dùng câu truy vấn để hiển thị lại thông tin table đó: **',nickName=(SELECT group_concat(profileID \|\|  "," \|\| name \|\| "," \|\| password \|\| ":") from usertable),email='** ta thấy được pass của admin đã thay đổi thành đoạn mã hash ta ghi ở trên.
+
+![](image/sql-27.png)
+
+Thoát user hiện tại và đăng nhập vào admin thử với mật khẩu đã biết. Và kết quả ta đã vào được profile của admin
+
+![](image/sql-28.png)
+
 
 ## Measures to prevent and protect against popular attack
 
