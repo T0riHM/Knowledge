@@ -11,13 +11,31 @@ Sau đây là 1 bài lab đơn giản bao gồm về những vấn đề như:
 
 Và cũng sẽ nói thêm về biện pháp phòng ngừa và bảo vệ/chống lại các tấn công phổ biến(Measures to prevent and protect against popular attack)
 
-# LAB
+# Mục lục
 
-## SQL injection
+[I. SQL Injection](#sqli)
+
+[1. Input Box Non-String](#sqli1)
+
+[2. Input Box String](#sqli2)
+
+[3. URL](#sqli3)
+
+[II. SQL Statements](#sqls)
+
+[*. Bonus](#sqls1)
+
+[III. Measures to prevent and protect against popular attack](#measures)
+
+# Nội dung lab
+
+<a name="sqli"></a>
+## I. SQL Injection
 
 Trong phần này ta sẽ làm việc với giao diện người dùng đăng nhập, ta sẽ sử dụng nhưng câu lệnh cơ bản để có thể đăng nhập vào nhưng không cần biết mật khẩu hay tài khoản của người dùng.
 
-### Input Box Non-String
+<a name="sqli1"></a>
+### 1. Input Box Non-String
 
 Đầu tiên, ta sẽ có 1 giao diện người dùng đơn giản như sau, với vai trò là 1 attacker, ta sẽ thử nhập bất cứ thứ gì để tìm manh mối.
 
@@ -39,7 +57,8 @@ Password nhập hay không nhập sẽ tùy vào giao diện bắt buộc hay kh
 
 ![](image/sql-4.png)
 
-### Input Box String
+<a name="sqli2"></a>
+### 2. Input Box String
 
 Cũng như ban đầu, ta có 1 giao diện người dùng đơn giản, cùng với những bước thử đơn giản để biết được cần làm những gì.
 
@@ -63,7 +82,8 @@ Khúc sau, password vẫn như trên, nên ta nhập gì cũng được.
 
 ![](image/sql-9.png)
 
-### URL
+<a name="sqli3"></a>
+### 3. URL
 
 Cũng như 2 phần trước, là 1 giao diện người dùng, ta thực hiện các bước như trước, và được trả về kết quả y như cái thứ 2 chúng ta đã là
 
@@ -85,7 +105,8 @@ Ta đã đăng nhập thành công và lấy được thông tin
 
 ![](image/sql-14.png)
 
-## SQL statements
+<a name="sqls"></a>
+## II. SQL statements
 
 Phần này sẽ chuyên sâu hơn về việc lấy, thay đổi dữ liệu người dùng và gần như chỉ áp dụng được khi đã thực hiện được bước SQL injection trên.
 
@@ -132,6 +153,7 @@ Và phát hiện ra cái cần kiếm **THM{b3a540515dbd9847c29cffa1bef1edfb}**
 
 ![](image/sql-23.png)
 
+<a name="sqls1"></a>
 ### \*Bonus
 
 Vào lúc ta tìm ra chỉ có 2 table là: userdata và secrets.
@@ -162,8 +184,8 @@ Thoát user hiện tại và đăng nhập vào admin thử với mật khẩu �
 
 ![](image/sql-28.png)
 
-
-## Measures to prevent and protect against popular attack
+<a name="measures"></a>
+## III. Measures to prevent and protect against popular attack
 
 **Sử dụng Web Application Firewalls (WAF):** có các rule chống syntax đã quy định trước, Load Balance, chống top 10 owsap,…
 
