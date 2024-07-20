@@ -51,20 +51,20 @@ Bản đầu tiên được viết vào 20/7/2024.
 ## II. Quy tắc chia sẻ và sử dụng thông tin trên mạng
 
 1.  Sử dụng ít nhất 3 địa chỉ email khác nhau dành cho các mục đích khác nhau. Ví dụ:
-  -   Một địa chỉ email được sử dụng để xác minh các dịch vụ không thiết yếu như giải trí, học tập
-  -   Một địa chỉ email được sử dụng để đăng kí các dịch vụ thiết yếu như ngân hàng, dịch vụ công
-  -   Một địa chỉ email cho riêng công việc
-  -   Nếu cần những email tạm thời để xác thực trong vài phút rồi bỏ. Gợi ý sử dụng [temp-mail](https://temp-mail.org/en/)
+      -   Một địa chỉ email được sử dụng để xác minh các dịch vụ không thiết yếu như giải trí, học tập
+      -   Một địa chỉ email được sử dụng để đăng kí các dịch vụ thiết yếu như ngân hàng, dịch vụ công
+      -   Một địa chỉ email cho riêng công việc
+      -   Nếu cần những email tạm thời để xác thực trong vài phút rồi bỏ. Gợi ý sử dụng [temp-mail](https://temp-mail.org/en/)
 2.  Không **NÊN\*** sử dụng cùng một mật khẩu cho nhiều dịch vụ và nên đặt theo khuyến nghị như sau:
--   Mật khẩu thường sẽ bao gồm chữ hoa, chữ thường, số, ký tự đặc biệt,…
--   Thay đổi theo chu kỳ 3 tháng, 6 tháng, 1 năm,…
--   Không được hao hao giống với tài khoản hoặc mật khẩu cũ
--   Mỗi 1 tài khoản nên là 1 mật khẩu độc nhất
+      -   Mật khẩu thường sẽ bao gồm chữ hoa, chữ thường, số, ký tự đặc biệt,…
+      -   Thay đổi theo chu kỳ 3 tháng, 6 tháng, 1 năm,…
+      -   Không được hao hao giống với tài khoản hoặc mật khẩu cũ
+      -   Mỗi 1 tài khoản nên là 1 mật khẩu độc nhất
 3.  Sử dụng chức năng xác thực hai lớp nếu có
 4.  Sử dụng các ứng dụng VPN để ẩn địa chỉ IP
 5.  Không **NÊN\*** sử dụng cùng một biệt danh/tên đăng nhập cho nhiều dịch vụ khác nhau
--   Nếu có dùng chung một biệt danh/tên đăng nhập nên thay đổi ít nhất ở 1 vài chi tiết, như chữ o có thể thay bằng số 0, e thành 3,…
--   Hoặc có thể sử dụng những con số, chữ đặc biệt đối với bản thân thêm vào cuối biệt danh/tên đăng nhập
+      -   Nếu có dùng chung một biệt danh/tên đăng nhập nên thay đổi ít nhất ở 1 vài chi tiết, như chữ o có thể thay bằng số 0, e thành 3,…
+      -   Hoặc có thể sử dụng những con số, chữ đặc biệt đối với bản thân thêm vào cuối biệt danh/tên đăng nhập
 6.  Hạn chế đăng nhập các tài khoản như Google, Facebook,.. vào các thiết bị chưa rõ nguồn gốc hoặc hạn chế ít nhất có thể, khi đăng nhập xong NHỚ log out ra
 
 \*Chỉ là không **NÊN**, không có nghĩa là không được làm thế, và cũng có gợi ý nếu dùng
